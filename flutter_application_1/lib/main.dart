@@ -13,29 +13,44 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: "My Application",
         theme: ThemeData(primarySwatch: Colors.blueGrey),
-        home: Scaffold(
-            appBar: AppBar(title: const Text("NGOMNGOM")),
-            body: const CenterCol()));
+        home: Index());
   }
 }
 
-class CenterCol extends StatelessWidget {
-  const CenterCol({super.key});
+class Index extends StatefulWidget {
+  const Index({super.key});
 
   @override
+  State<Index> createState() => _IndexState();
+}
+
+class _IndexState extends State<Index> {
+  int count = 0;
+  @override
   Widget build(BuildContext context) {
-    return const Center(
-        child: Column(children: [
-      Text(
-        "This is centered",
-        style: TextStyle(
-          fontSize: 20,
-          color: Colors.lightBlueAccent,
-        ),
-      ),
-      Image(
-          image: NetworkImage(
-              "https://cdn.britannica.com/26/162626-050-3534626F/Koala.jpg"))
-    ]));
+    return Scaffold(
+      appBar: AppBar(title: const Text("NGOMNGOM")),
+      body: Center(
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+            const Text(
+              "This is centered",
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.lightBlueAccent,
+              ),
+            ),
+            Text("$count"),
+            const Image(
+                image: NetworkImage(
+                    "https://cdn.britannica.com/26/162626-050-3534626F/Koala.jpg"))
+          ])),
+      floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            setState(() => count++);
+          },
+          child: const Icon(Icons.explicit_sharp)),
+    );
   }
 }
