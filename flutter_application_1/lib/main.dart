@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "FoodMenu.dart";
+import "MoneyBox.dart";
 
 void main() {
   var app = const MyApp();
@@ -48,56 +49,11 @@ class _IndexState extends State<Index> {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(children: [
-          Container(
-            padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-                color: Colors.blueGrey,
-                borderRadius: BorderRadius.circular(20)),
-            height: 50,
-            child: const Row(
-              children: [
-                Text(
-                  "ยอดคงเหลือ",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600),
-                ),
-                Expanded(
-                    child: Text(
-                  "______ Baht",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600),
-                  textAlign: TextAlign.right,
-                ))
-              ],
-            ),
-          ),
+          MoneyBox(
+              info: "ยอดคงเหลือ", number: 50, color: Colors.cyan, size: 50),
           const SizedBox(height: 10),
-          Container(
-            padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-                color: Colors.grey, borderRadius: BorderRadius.circular(20)),
-            height: 50,
-            child: const Row(
-              children: [
-                Text("Bank",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600)),
-                Expanded(
-                    child: Text("____ Baht",
-                        textAlign: TextAlign.end,
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600)))
-              ],
-            ),
-          )
+          MoneyBox(
+              info: "ใช้ไป", number: 5000, color: Colors.deepPurple, size: 60)
         ]),
       ),
       floatingActionButton: FloatingActionButton(
