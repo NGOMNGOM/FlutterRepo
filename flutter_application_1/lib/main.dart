@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "FoodMenu.dart";
 
 void main() {
   var app = const MyApp();
@@ -26,6 +27,10 @@ class Index extends StatefulWidget {
 
 class _IndexState extends State<Index> {
   int count = 0;
+  List<FoodMenu> menu = [
+    FoodMenu("Shrimp", 550, "image/koalas.png"),
+    FoodMenu("Somtam", 50, "image/koalas.png")
+  ];
   @override
   Widget build(BuildContext context) {
     List<Widget> data = [];
@@ -41,15 +46,15 @@ class _IndexState extends State<Index> {
     return Scaffold(
       appBar: AppBar(title: const Text("NGOMNGOM")),
       body: ListView.builder(
-          itemCount: 15,
+          itemCount: menu.length,
           itemBuilder: (BuildContext context, int index) {
             return ListTile(
+              leading: Image.asset(menu[index].pic),
               title: Text(
-                "Menu No. ${index + 1}",
-                style: TextStyle(
-                    fontSize: (index + 1) * 3, color: Colors.blueAccent),
+                "Menu: ${menu[index].name}",
+                style: const TextStyle(fontSize: 20, color: Colors.blueGrey),
               ),
-              subtitle: Text("This is font size ${(index + 1) * 3}"),
+              subtitle: Text("Price: ${menu[index].price}"),
             );
           }),
       floatingActionButton: FloatingActionButton(
