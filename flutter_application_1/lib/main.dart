@@ -40,7 +40,18 @@ class _IndexState extends State<Index> {
             "https://cdn.britannica.com/26/162626-050-3534626F/Koala.jpg")));
     return Scaffold(
       appBar: AppBar(title: const Text("NGOMNGOM")),
-      body: Center(child: getData(50, information: "Again")),
+      body: ListView.builder(
+          itemCount: 15,
+          itemBuilder: (BuildContext context, int index) {
+            return ListTile(
+              title: Text(
+                "Menu No. ${index + 1}",
+                style: TextStyle(
+                    fontSize: (index + 1) * 3, color: Colors.blueAccent),
+              ),
+              subtitle: Text("This is font size ${(index + 1) * 3}"),
+            );
+          }),
       floatingActionButton: FloatingActionButton(
           onPressed: countUp, child: const Icon(Icons.explicit_sharp)),
     );
