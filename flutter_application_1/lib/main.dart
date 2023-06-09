@@ -55,6 +55,7 @@ class _IndexState extends State<Index> {
                 style: const TextStyle(fontSize: 20, color: Colors.blueGrey),
               ),
               subtitle: Text("Price: ${menu[index].price}"),
+              onTap: () => print("Select menu ${menu[index].name}"),
             );
           }),
       floatingActionButton: FloatingActionButton(
