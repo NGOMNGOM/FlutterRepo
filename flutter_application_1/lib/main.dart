@@ -44,20 +44,62 @@ class _IndexState extends State<Index> {
         image: NetworkImage(
             "https://cdn.britannica.com/26/162626-050-3534626F/Koala.jpg")));
     return Scaffold(
-      appBar: AppBar(title: const Text("NGOMNGOM")),
-      body: ListView.builder(
-          itemCount: menu.length,
-          itemBuilder: (BuildContext context, int index) {
-            return ListTile(
-              leading: Image.asset(menu[index].pic),
-              title: Text(
-                "Menu: ${menu[index].name}",
-                style: const TextStyle(fontSize: 20, color: Colors.blueGrey),
-              ),
-              subtitle: Text("Price: ${menu[index].price}"),
-              onTap: () => print("Select menu ${menu[index].name}"),
-            );
-          }),
+      appBar: AppBar(title: const Text("บัญชีรายรับรายจ่าย")),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(children: [
+          Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+                color: Colors.blueGrey,
+                borderRadius: BorderRadius.circular(20)),
+            height: 50,
+            child: const Row(
+              children: [
+                Text(
+                  "ยอดคงเหลือ",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600),
+                ),
+                Expanded(
+                    child: Text(
+                  "______ Baht",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600),
+                  textAlign: TextAlign.right,
+                ))
+              ],
+            ),
+          ),
+          const SizedBox(height: 10),
+          Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+                color: Colors.grey, borderRadius: BorderRadius.circular(20)),
+            height: 50,
+            child: const Row(
+              children: [
+                Text("Bank",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600)),
+                Expanded(
+                    child: Text("____ Baht",
+                        textAlign: TextAlign.end,
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600)))
+              ],
+            ),
+          )
+        ]),
+      ),
       floatingActionButton: FloatingActionButton(
           onPressed: countUp, child: const Icon(Icons.explicit_sharp)),
     );
