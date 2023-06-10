@@ -33,7 +33,15 @@ class _IndexState extends State<Index> {
     FoodMenu("Somtam", 50, "image/koalas.png")
   ];
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    print("This is intiState()");
+  }
+
+  @override
   Widget build(BuildContext context) {
+    print("New Build");
     List<Widget> data = [];
     data.add(const Text("This is centered",
         style: TextStyle(
@@ -46,19 +54,7 @@ class _IndexState extends State<Index> {
             "https://cdn.britannica.com/26/162626-050-3534626F/Koala.jpg")));
     return Scaffold(
       appBar: AppBar(title: const Text("บัญชีรายรับรายจ่าย")),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(children: [
-          MoneyBox(
-              info: "ยอดคงเหลือ",
-              number: 100000.50,
-              color: Colors.cyan,
-              size: 50),
-          const SizedBox(height: 10),
-          MoneyBox(
-              info: "ใช้ไป", number: 5000, color: Colors.deepPurple, size: 60)
-        ]),
-      ),
+      body: Text(count.toString()),
       floatingActionButton: FloatingActionButton(
           onPressed: countUp, child: const Icon(Icons.explicit_sharp)),
     );
