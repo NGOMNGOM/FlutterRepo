@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 // ignore: must_be_immutable
 class MoneyBox extends StatelessWidget {
@@ -28,7 +29,7 @@ class MoneyBox extends StatelessWidget {
           ),
           Expanded(
               child: Text(
-            "$number Baht",
+            "${NumberFormat("#,###.##").format(number)} Baht",
             style: const TextStyle(
                 color: Colors.white, fontSize: 15, fontWeight: FontWeight.w600),
             textAlign: TextAlign.right,

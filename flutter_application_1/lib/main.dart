@@ -50,7 +50,10 @@ class _IndexState extends State<Index> {
         padding: const EdgeInsets.all(8.0),
         child: Column(children: [
           MoneyBox(
-              info: "ยอดคงเหลือ", number: 50, color: Colors.cyan, size: 50),
+              info: "ยอดคงเหลือ",
+              number: 100000.50,
+              color: Colors.cyan,
+              size: 50),
           const SizedBox(height: 10),
           MoneyBox(
               info: "ใช้ไป", number: 5000, color: Colors.deepPurple, size: 60)
