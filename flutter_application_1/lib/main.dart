@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import "FoodMenu.dart";
 import "MoneyBox.dart";
+import "package:http/http.dart" as http;
 
 void main() {
   var app = const MyApp();
@@ -36,12 +37,17 @@ class _IndexState extends State<Index> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    print("This is intiState()");
+    getExchangeRate();
+  }
+
+  Future<void> getExchangeRate() async {
+    var url = Uri.parse("https://api.exchangerate-api.com/v4/latest/THB");
+    var res = await http.get(url);
+    print(res.body);
   }
 
   @override
   Widget build(BuildContext context) {
-    print("New Build");
     List<Widget> data = [];
     data.add(const Text("This is centered",
         style: TextStyle(
@@ -53,8 +59,15 @@ class _IndexState extends State<Index> {
         image: NetworkImage(
             "https://cdn.britannica.com/26/162626-050-3534626F/Koala.jpg")));
     return Scaffold(
-      appBar: AppBar(title: const Text("บัญชีรายรับรายจ่าย")),
-      body: Text(count.toString()),
+      appBar: AppBar(title: const Text("Exchange Rate")),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            MoneyBox(info: "USD", number: 50000, color: Colors.indigo, size: 50)
+          ],
+        ),
+      ),
       floatingActionButton: FloatingActionButton(
           onPressed: countUp, child: const Icon(Icons.explicit_sharp)),
     );
