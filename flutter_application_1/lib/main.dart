@@ -62,28 +62,40 @@ class _IndexState extends State<Index> {
         image: NetworkImage(
             "https://cdn.britannica.com/26/162626-050-3534626F/Koala.jpg")));
     return Scaffold(
-      appBar: AppBar(title: const Text("Exchange Rate")),
+      appBar: AppBar(title: const Text("App แปลงสกุลเงิน")),
       body: FutureBuilder(
           future: getExchangeRate(),
           builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
             // ดึงมาครบแล้ว
             if (snapshot.connectionState == ConnectionState.done) {
               var result = snapshot.data;
-              return ListView(
-                children: [
-                  ListTile(
-                    title: Text(result.base),
-                  ),
-                  ListTile(
-                    title: Text("${result.date}"),
-                  ),
-                  ListTile(
-                    title: Text(result.rates["EUR"].toString()),
-                  ),
-                  ListTile(
-                    title: Text(result.rates["USD"].toString()),
-                  )
-                ],
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    MoneyBox(
+                        info: "สกุลเงิน ${result.base}",
+                        number: 1,
+                        color: Colors.indigo,
+                        size: 50),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    MoneyBox(
+                        info: "EUR",
+                        number: result.rates["EUR"],
+                        color: Colors.teal,
+                        size: 50),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    MoneyBox(
+                        info: "USD",
+                        number: result.rates["USD"],
+                        color: Colors.cyan,
+                        size: 50),
+                  ],
+                ),
               );
             }
             return const LinearProgressIndicator();
