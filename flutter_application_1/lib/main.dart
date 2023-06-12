@@ -45,7 +45,10 @@ class _IndexState extends State<Index> {
   Future<void> getExchangeRate() async {
     var url = Uri.parse("https://api.exchangerate-api.com/v4/latest/THB");
     var res = await http.get(url);
-    _dataFromAPI = exchangeRateFromJson(res.body); // json => dart object
+    setState(() {
+      _dataFromAPI = exchangeRateFromJson(res.body); // json => dart object
+      // ให้ว่า _dataFromAPI เป็น State
+    });
   }
 
   @override
@@ -62,13 +65,14 @@ class _IndexState extends State<Index> {
             "https://cdn.britannica.com/26/162626-050-3534626F/Koala.jpg")));
     return Scaffold(
       appBar: AppBar(title: const Text("Exchange Rate")),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            MoneyBox(info: "USD", number: 50000, color: Colors.indigo, size: 50)
-          ],
-        ),
+      body: Column(
+        children: [
+          Text(_dataFromAPI!.base ?? "Loading..."),
+          const LinearProgressIndicator(
+            color: Colors.amberAccent,
+            backgroundColor: Colors.amber,
+          )
+        ],
       ),
       floatingActionButton: FloatingActionButton(
           onPressed: countUp, child: const Icon(Icons.explicit_sharp)),
