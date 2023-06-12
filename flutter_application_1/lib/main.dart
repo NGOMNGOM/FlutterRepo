@@ -42,13 +42,11 @@ class _IndexState extends State<Index> {
     getExchangeRate();
   }
 
-  Future<void> getExchangeRate() async {
+  Future<ExchangeRate?> getExchangeRate() async {
     var url = Uri.parse("https://api.exchangerate-api.com/v4/latest/THB");
     var res = await http.get(url);
-    setState(() {
-      _dataFromAPI = exchangeRateFromJson(res.body); // json => dart object
-      // ให้ว่า _dataFromAPI เป็น State
-    });
+    _dataFromAPI = exchangeRateFromJson(res.body);
+    return _dataFromAPI;
   }
 
   @override
@@ -65,15 +63,15 @@ class _IndexState extends State<Index> {
             "https://cdn.britannica.com/26/162626-050-3534626F/Koala.jpg")));
     return Scaffold(
       appBar: AppBar(title: const Text("Exchange Rate")),
-      body: Column(
-        children: [
-          Text(_dataFromAPI!.base ?? "Loading..."),
-          const LinearProgressIndicator(
-            color: Colors.amberAccent,
-            backgroundColor: Colors.amber,
-          )
-        ],
-      ),
+      body: FutureBuilder(
+          future: getExchangeRate(),
+          builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+            // ดึงมาครบแล้ว
+            if (snapshot.connectionState == ConnectionState.done) {
+              return Text("ดึงข้อมูลครบถ้วน");
+            }
+            return const LinearProgressIndicator();
+          }),
       floatingActionButton: FloatingActionButton(
           onPressed: countUp, child: const Icon(Icons.explicit_sharp)),
     );
