@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import "FoodMenu.dart";
 import "MoneyBox.dart";
 import "package:http/http.dart" as http;
+import "ExchangeRate.dart";
 
 void main() {
   var app = const MyApp();
@@ -29,6 +30,7 @@ class Index extends StatefulWidget {
 
 class _IndexState extends State<Index> {
   int count = 0;
+  ExchangeRate? _dataFromAPI;
   List<FoodMenu> menu = [
     FoodMenu("Shrimp", 550, "image/koalas.png"),
     FoodMenu("Somtam", 50, "image/koalas.png")
@@ -43,7 +45,7 @@ class _IndexState extends State<Index> {
   Future<void> getExchangeRate() async {
     var url = Uri.parse("https://api.exchangerate-api.com/v4/latest/THB");
     var res = await http.get(url);
-    print(res.body);
+    _dataFromAPI = exchangeRateFromJson(res.body); // json => dart object
   }
 
   @override
