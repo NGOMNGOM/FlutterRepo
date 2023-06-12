@@ -68,7 +68,23 @@ class _IndexState extends State<Index> {
           builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
             // ดึงมาครบแล้ว
             if (snapshot.connectionState == ConnectionState.done) {
-              return Text("ดึงข้อมูลครบถ้วน");
+              var result = snapshot.data;
+              return ListView(
+                children: [
+                  ListTile(
+                    title: Text(result.base),
+                  ),
+                  ListTile(
+                    title: Text("${result.date}"),
+                  ),
+                  ListTile(
+                    title: Text(result.rates["EUR"].toString()),
+                  ),
+                  ListTile(
+                    title: Text(result.rates["USD"].toString()),
+                  )
+                ],
+              );
             }
             return const LinearProgressIndicator();
           }),
